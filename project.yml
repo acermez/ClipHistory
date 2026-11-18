@@ -1,0 +1,60 @@
+name: ClipHistory
+options:
+  bundleIdPrefix: com.aminemezghani
+  deploymentTarget:
+    macOS: "14.0"
+
+targets:
+  ClipHistory:
+    type: application
+    platform: macOS
+    sources:
+      - ClipHistory
+    info:
+      path: ClipHistory/Info.plist
+      properties:
+        CFBundleDisplayName: ClipHistory
+        CFBundleShortVersionString: "1.0.0"
+        CFBundleVersion: "1"
+        LSUIElement: true
+        LSApplicationCategoryType: public.app-category.utilities
+        CFBundleURLTypes:
+          - CFBundleURLName: com.aminemezghani.ClipHistory
+            CFBundleURLSchemes:
+              - cliphistory
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.aminemezghani.ClipHistory
+        SWIFT_VERSION: "5.0"
+        MACOSX_DEPLOYMENT_TARGET: "14.0"
+        GENERATE_INFOPLIST_FILE: NO
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ENABLE_HARDENED_RUNTIME: NO
+        CODE_SIGN_STYLE: Manual
+        CODE_SIGN_IDENTITY: "-"
+        CODE_SIGNING_REQUIRED: NO
+
+  ClipHistoryTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - ClipHistoryTests
+    dependencies:
+      - target: ClipHistory
+    settings:
+      base:
+        SWIFT_VERSION: "5.0"
+        GENERATE_INFOPLIST_FILE: YES
+        CODE_SIGN_STYLE: Manual
+        CODE_SIGN_IDENTITY: "-"
+        CODE_SIGNING_REQUIRED: NO
+
+schemes:
+  ClipHistory:
+    build:
+      targets:
+        ClipHistory: all
+        ClipHistoryTests: [test]
+    test:
+      targets:
+        - ClipHistoryTests
